@@ -1,0 +1,19 @@
+
+.barra {
+    display: flex;
+    align-items: center;
+    height: 60px;
+    gap: 4px;
+    margin-bottom: 10px;
+
+    &__config {
+        gap: 4px;
+        display: flex;
+    }
+
+    &__vista-previa {
+        margin-left: 2px;
+        background-color: #fff;
+    }
+
+}

@@ -1,0 +1,90 @@
+
+.paleta-color {
+  display: flex;
+  flex-direction: column;
+  height: 60px;
+
+  &__label {
+    font-size: 20px;
+    font-weight: 600;
+  }
+
+  &__input {
+    width: 100%;
+    border: 1px solid rgba(#000, .4);
+  }
+}
+
+
+.boton {
+  height: 100%;
+  
+  &__principal {
+    width: 120px;
+    font-size: 16px;
+    text-align: center;
+    font-weight: 600;
+    padding: 10px;
+    border: none;
+    background: #003df5f0;
+    color: #032e3feb;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+
+
+.boton-link {
+  display: flex;
+  height: 60px;
+  width: 140px;
+  cursor: pointer;
+  background-color: #003df5f0;
+  color: #032e3feb;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 16px;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+.control {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  gap: 10px;
+}
+
+
+
+.control-columna {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  &__h1 {
+    margin-left: 10px;
+  }
+}
+
+.boton-columna {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 80px;
+  &__button {
+    height: 60px;
+    width: 40px;
+    font-size: 28px;
+    line-height: 28px;
+    border: none;
+    &:first-child{
+      border-bottom: 1px solid ;
+    }
+  }
+}

@@ -1,0 +1,42 @@
+.ventana-capa {
+    width: 80px;
+    height: 60px;
+    background-color: lighten(#003df5,10);
+    position: relative;
+    cursor: pointer;
+    &--active {
+        background: #003df5;
+    }
+}
+
+.capas {
+    display: flex;
+    gap: 4px;
+}
+
+.boton-agregar {
+    width: 40px;
+    background-color: #003df5f0;
+    border: none;
+    color: #032e3feb;
+    font-size: 20px;
+}
+
+.borrar-capa {
+    width: 28px;
+    height: 28px;
+    background-color: #032e3feb;
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: #ffffff;
+    display: block;
+    text-align: center;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+
+.preview {
+    padding: 10px;
+}
