@@ -43,10 +43,6 @@ class GrupoCapa {
         return capa
     }
 
-    isCompletado() {
-        return this.capaArray.length > 8
-    }
-
     toPilaCapa() {
         const array = this.capaArray.sort((a, b)=> {
             return a.id < b.id

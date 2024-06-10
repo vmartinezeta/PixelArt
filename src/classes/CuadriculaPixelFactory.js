@@ -1,6 +1,6 @@
 import Color from "./Color"
 import CuadriculaPixel from "./CuadriculaPixel"
-import Fila from "./Fila"
+import FullLineaPixel from "./FullLineaPixel"
 import Pixel from "./Pixel"
 import Punto from "./Punto"
 import Ubicacion from "./Ubicacion"
@@ -10,7 +10,7 @@ class CuadriculaPixelFactory {
     constructor(filas, columnas) {
         this.filas = filas || 20
         this.columnas = columnas || 20
-        this.filaArray = []
+        this.lineaArray = []
         let color = new Color()
         for (let i = 0; i < this.filas; i++) {
             const pixelArray = []
@@ -22,12 +22,12 @@ class CuadriculaPixelFactory {
                 color.intercambiarBase()
             }
             color.intercambiarBase()
-            this.filaArray.push(new Fila(pixelArray))
+            this.lineaArray.push(new FullLineaPixel(pixelArray))
         }
     }
 
     crearCuadricula() {
-        return new CuadriculaPixel(this.filaArray)
+        return new CuadriculaPixel(this.lineaArray)
     }
 
 }

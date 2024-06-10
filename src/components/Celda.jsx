@@ -2,13 +2,17 @@ import { usePixelArt } from "../context/PixelArtStore"
 
 
 export default function Celda({ pixel, disabled }) {
-    const { seleccionPixelArray, arrastre, actualizarPixel,  setArrastre } = usePixelArt()
+    const { arrastre, actualizarPixel, setArrastre } = usePixelArt()
+    const estado = ["tablero", "tablero__celda"]
+    const color = pixel.getColor()
+
 
     const onPintar = () => {
         actualizarPixel(pixel)
     }
 
     const onMarcando = evento => {
+        evento.stopPropagation()
         if (!arrastre.actual && !arrastre.anterior) {
             arrastre.anterior = true
             setArrastre(arrastre)
@@ -23,16 +27,16 @@ export default function Celda({ pixel, disabled }) {
         }
     }
 
-    const estado = ["tablero", "tablero__celda"]
     if (!disabled) {
         estado.pop()
     }
 
+
     return <div className={estado.join(" ")}
-        onClick={!disabled?onPintar:undefined}
-        onPointerEnter={!disabled?onMarcando:undefined}
+        onClick={!disabled ? onPintar : undefined}
+        // onPointerEnter={!disabled ? onMarcando : undefined}
         style={{
-            "backgroundColor": !disabled || !pixel.getColor().isBase() ? pixel.getColor().getHexadecimal():undefined,
+            "backgroundColor": !disabled || !color.isBase() ? color.getHexadecimal() : undefined,
             "width": 20,
             "height": 20
         }}

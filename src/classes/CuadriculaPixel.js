@@ -1,7 +1,7 @@
 import ConstructorDiagonal from "./ConstructorDiagonal"
 import DeltaX from "./DeltaX"
 import DeltaY from "./DeltaY"
-import Fila from "./Fila"
+import Fila from "./FullLineaPixel"
 import Linea from "./Linea"
 import Pixel from "./Pixel"
 import Punto from "./Punto"
@@ -9,34 +9,31 @@ import Ubicacion from "./Ubicacion"
 
 
 export default class CuadriculaPixel {
-    constructor(filaArray) {
-        this.filaArray = filaArray
+    constructor(lineaArray) {
+        this.lineaArray = lineaArray
         this.diferencia = undefined
     }
 
     toArray() {
-        return this.filaArray.map(fila => fila.toArray())
+        return this.lineaArray.map(fila => fila.toArray())
     }
 
     toLineaArray() {
         const area = this.getArea()
         let lineaArray = []
         for (let i = 0; i < area.getX(); i++) {
-            const filaArrayHorizontal = []
-            for (let j = 0; j < area.getY(); j++) {
-                filaArrayHorizontal.push(this.fromXY(i, j))
-            }
+            const pixelsHorizontal = this.lineaArray[i].toArray()
             lineaArray.push(
-                new Linea("HORIZONTAL", filaArrayHorizontal)
+                new Linea("HORIZONTAL", pixelsHorizontal)
             )
         }
-        for (let i = 0; i < area.getY(); i++) {
-            const filaArrayVertical = []
-            for (let j = 0; j < area.getX(); j++) {
-                filaArrayVertical.push(this.fromXY(i, j))
+        for (let j = 0; j < area.getY(); j++) {
+            const pixelsVertical = []
+            for (let i = 0; i < area.getX(); i++) {
+                pixelsVertical.push(this.lineaArray[i].toArray()[j])
             }
             lineaArray.push(
-                new Linea("VERTICAL", filaArrayVertical)
+                new Linea("VERTICAL", pixelsVertical)
             )
         }
 
@@ -73,7 +70,7 @@ export default class CuadriculaPixel {
         if (!this.isValidoLimite()) return
         const { filas, delta } = this.diferencia
         for (let i = 0; i < filas; i++) {
-            const fila = this.filaArray[i].newInstance()
+            const fila = this.lineaArray[i].newInstance()
             const pixel = fila.getUltimo()
             let color = pixel.getColor()
             color = color.newInstance()
@@ -81,7 +78,7 @@ export default class CuadriculaPixel {
             const area = new Punto(40, 40)
             const ubicacion = new Ubicacion(new Punto(i, delta.inicio), new Punto(area.getX() * i, area.getY() * delta.inicio))
             fila.agregar(new Pixel(color, ubicacion, area))
-            this.filaArray[i] = fila
+            this.lineaArray[i] = fila
         }
     }
 
@@ -89,8 +86,8 @@ export default class CuadriculaPixel {
         if (!this.isValidoLimite()) return
         const { delta, columnas } = this.diferencia
         for (let i = delta.inicio; i < delta.final; i++) {
-            const n = this.filaArray.length
-            const fila = this.filaArray[n - 1]
+            const n = this.lineaArray.length
+            const fila = this.lineaArray[n - 1]
             const pixel = fila.getPrimero()
             let color = pixel.getColor()
             color = color.newInstance()
@@ -102,30 +99,30 @@ export default class CuadriculaPixel {
                 color = color.newInstance()
                 color.intercambiarBase()
             }
-            this.filaArray.push(new Fila(linea))
+            this.lineaArray.push(new Fila(linea))
         }
     }
 
     eliminarPixelesHorizontal() {
         const { filas, delta } = this.diferencia
         for (let i = 0; i < filas; i++) {
-            const pixelArray = this.filaArray[i].toArray()
+            const pixelArray = this.lineaArray[i].toArray()
             pixelArray.splice(delta.final)
-            this.filaArray[i] = new Fila(pixelArray)
+            this.lineaArray[i] = new Fila(pixelArray)
         }
     }
 
     eliminarPixelesVertical() {
         const { delta } = this.diferencia
-        const filaArray = []
+        const lineaArray = []
         for (let i = 0; i < delta.final; i++) {
-            filaArray.push(this.filaArray[i])
+            lineaArray.push(this.lineaArray[i])
         }
-        this.filaArray = filaArray
+        this.lineaArray = lineaArray
     }
 
     actualizarPixel(pixel) {
-        this.filaArray = this.filaArray.map(fila => {
+        this.lineaArray = this.lineaArray.map(fila => {
             if (fila.existe(pixel)) {
                 fila.actualizar(pixel)
             }
@@ -134,11 +131,11 @@ export default class CuadriculaPixel {
     }
 
     getArea() {
-        if (this.filaArray.length === 0) {
+        if (this.lineaArray.length === 0) {
             throw new TypeError("Vacia la cuadricula")
         }
-        const x = this.filaArray.length
-        const y = this.filaArray[0].getSize()
+        const x = this.lineaArray.length
+        const y = this.lineaArray[0].getSize()
         return new Punto(x, y)
     }
 
@@ -146,7 +143,7 @@ export default class CuadriculaPixel {
         const area = this.getArea()
         const columna = []
         for (let i = 0; i < area.getX(); i++) {
-            columna.push(this.filaArray[i][0])
+            columna.push(this.lineaArray[i][0])
         }
         return columna
     }
@@ -156,13 +153,13 @@ export default class CuadriculaPixel {
         const fila = []
         const i = area.getX() - 1
         for (let j = 0; j < area.getY(); j++) {
-            fila.push(this.filaArray[i][j])
+            fila.push(this.lineaArray[i][j])
         }
         return fila
     }
 
     newInstance() {
-        const filaArray = this.filaArray.map(fila => fila.newInstance())
-        return new CuadriculaPixel(filaArray)
+        const lineaArray = this.lineaArray.map(fila => fila.newInstance())
+        return new CuadriculaPixel(lineaArray)
     }
 }

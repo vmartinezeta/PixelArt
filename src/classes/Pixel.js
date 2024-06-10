@@ -36,7 +36,7 @@ class Pixel {
     newInstance() {
         return new Pixel(this.color, this.ubicacion, this.area)
     }
-    
+
 }
 
 export default Pixel

@@ -26,15 +26,13 @@ try {
     capaSelected = grupo.getActiva()
 } catch (error) {}
 
-const capturaCapa = new CapturaCapa(capaSelected.id)
-let capturasXcapa = [capturaCapa]
-
+let capturaCapa = new CapturaCapa(capaSelected.id)
+const capturasCapa = [capturaCapa]
 
 
 const PixelArtProvider = ({ children }) => {
     const [color, setColor] = useState("#0817e2")
     const [capa, setCapa] = useState(capaSelected)
-    const [seleccionPixelArray, setSeleccionPixelArray] = useState([])
     const [arrastre, setArrastre] = useState({anterior:true, actual:false})
     const [pilaCapa, setPilaCapa] = useState(grupo.toPilaCapa())
 
@@ -46,6 +44,7 @@ const PixelArtProvider = ({ children }) => {
 
     const actualizarPixel = pixel => {
         capaSelected = capa.newInstance()
+        capturaCapa.agregar(pixel)
         const actual = pixel.getColor()
         actual.setHexadecimal(color)
         pixel.setColor(actual)
@@ -62,7 +61,6 @@ const PixelArtProvider = ({ children }) => {
         setCapa(capaSelected)
     }
 
-  
     const agregarCapa = () => {
         const factory = new CuadriculaPixelFactory()
         const cuadricula = factory.crearCuadricula()
@@ -76,6 +74,7 @@ const PixelArtProvider = ({ children }) => {
     }
 
     const activarCapa = capa => {
+        if (capa.isActiva()) return
         grupo.setActiva(capa.id)    
         setPilaCapa(grupo.toPilaCapa())
         capaSelected = capa.newInstance()
@@ -83,6 +82,20 @@ const PixelArtProvider = ({ children }) => {
     }
 
     const deshacer = () => {
+        const capturaCapa = capturasCapa.find(captura => captura.id === capaSelected.id)
+        try {
+            capturaCapa.quitarFinal()
+        } catch (e) {
+            return
+        }
+
+        const pixel = capturaCapa.getActual()
+        const color = pixel.getColor()
+        color.reset()
+        capaSelected = capa.newInstance()
+        const cuadricula = capaSelected.cuadriculaPixel
+        cuadricula.actualizarPixel(pixel)
+        setCapa(capaSelected)
     }
 
     return <PixelArtContext.Provider
@@ -90,7 +103,6 @@ const PixelArtProvider = ({ children }) => {
             color,
             cambiarColor,
             actualizarPixel,
-            seleccionPixelArray,
             arrastre,
             setArrastre,
             capa,
@@ -98,7 +110,8 @@ const PixelArtProvider = ({ children }) => {
             activarCapa,
             borrarCapa,
             pilaCapa,
-            agregarCapa
+            agregarCapa,
+            deshacer
         }}
     >
         {children}

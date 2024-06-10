@@ -1,5 +1,5 @@
 
-class Fila {
+class FullLineaPixel {
     constructor(pixelArray) {
         this.pixelArray = pixelArray
     }
@@ -39,9 +39,9 @@ class Fila {
     }
 
     newInstance() {
-        return new Fila(this.pixelArray)
+        return new FullLineaPixel(this.pixelArray)
     }
 
 }
 
-export default Fila
+export default FullLineaPixel

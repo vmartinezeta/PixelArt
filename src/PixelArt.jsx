@@ -1,7 +1,6 @@
 import './estilos/estilos.scss'
 import Tablero from './components/Tablero'
 import PaletaColor from './components/PaletaColor'
-import ConfiguracionProyecto from './components/ConfiguracionProyecto'
 import ReduceLienzo from './components/ReduceLienzo'
 import VistaPrevia from './components/VistaPrevia'
 import Footer from './components/Footer'
@@ -9,6 +8,8 @@ import Header from './components/Header'
 import Columna from './components/Columna'
 import VistaPreviaCapas from './components/VistaPreviaCapas'
 import PixelArtProvider from './context/PixelArtStore'
+import BarraHerramientas from './components/Toolkit'
+import Toolkit from './components/Toolkit'
 
 
 
@@ -20,7 +21,7 @@ function PixelArt() {
             <div className="barra">
                 <Columna className="barra__config">
                     <PaletaColor />
-                    <ConfiguracionProyecto />
+                    <Toolkit />
                 </Columna>
                 <VistaPreviaCapas />
             </div>
