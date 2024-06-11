@@ -100,7 +100,7 @@ const PixelArtProvider = ({ children }) => {
 
     const excluirPixelSeleccionados = () => {
         capturaCapa.excluirSeleccionados()
-        capaSelected = capa.newInstance()
+        capaSelected = capturaCapa.getCapa()
         setCapa(capaSelected)
     }
 

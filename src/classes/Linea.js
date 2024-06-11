@@ -24,6 +24,10 @@ class Linea {
         return this.orientacion
     }
 
+    newInstance() {
+        return new Linea(this.orientacion, this.pixeles.slice())
+    }
+
 }
 
 export default Linea

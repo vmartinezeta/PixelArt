@@ -4,10 +4,10 @@ import DescargaImage from './Descarga'
 
 export default function Toolkit() {
 
-    const { deshacer} = usePixelArt()
+    const { deshacer, excluirPixelSeleccionados} = usePixelArt()
 
     const onInvertirSeleccion = () => {
-        console.log("ok")
+        excluirPixelSeleccionados()
     }
 
 

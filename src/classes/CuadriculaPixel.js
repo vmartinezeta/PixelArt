@@ -1,4 +1,3 @@
-import ConstructorDiagonal from "./ConstructorDiagonal"
 import DeltaX from "./DeltaX"
 import DeltaY from "./DeltaY"
 import Fila from "./FullLineaPixel"
