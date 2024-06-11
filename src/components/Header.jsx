@@ -1,4 +1,3 @@
-import { usePixelArt } from "../context/PixelArtStore"
 
 export default function Header() {
     return <div className="header">

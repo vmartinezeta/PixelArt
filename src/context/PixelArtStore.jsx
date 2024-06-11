@@ -26,7 +26,7 @@ try {
     capaSelected = grupo.getActiva()
 } catch (error) {}
 
-let capturaCapa = new CapturaCapa(capaSelected.id)
+let capturaCapa = new CapturaCapa(capaSelected)
 const capturasCapa = [capturaCapa]
 
 
@@ -82,7 +82,7 @@ const PixelArtProvider = ({ children }) => {
     }
 
     const deshacer = () => {
-        const capturaCapa = capturasCapa.find(captura => captura.id === capaSelected.id)
+        const capturaCapa = capturasCapa.find(captura => captura.capa.id === capaSelected.id)
         try {
             capturaCapa.quitarFinal()
         } catch (e) {
@@ -98,6 +98,13 @@ const PixelArtProvider = ({ children }) => {
         setCapa(capaSelected)
     }
 
+    const excluirPixelSeleccionados = () => {
+        capturaCapa.excluirSeleccionados()
+        capaSelected = capa.newInstance()
+        setCapa(capaSelected)
+    }
+
+
     return <PixelArtContext.Provider
         value={{
             color,
@@ -111,7 +118,8 @@ const PixelArtProvider = ({ children }) => {
             borrarCapa,
             pilaCapa,
             agregarCapa,
-            deshacer
+            deshacer,
+            excluirPixelSeleccionados
         }}
     >
         {children}

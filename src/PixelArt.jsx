@@ -8,7 +8,6 @@ import Header from './components/Header'
 import Columna from './components/Columna'
 import VistaPreviaCapas from './components/VistaPreviaCapas'
 import PixelArtProvider from './context/PixelArtStore'
-import BarraHerramientas from './components/Toolkit'
 import Toolkit from './components/Toolkit'
 
 

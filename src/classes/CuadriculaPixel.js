@@ -37,10 +37,6 @@ export default class CuadriculaPixel {
             )
         }
 
-        const vector = new Punto(-1, 1)
-        const constructor = new ConstructorDiagonal(this, vector)
-        const diagonales = constructor.crear()
-        lineaArray = [...lineaArray, ...diagonales]
         return lineaArray
     }
 
