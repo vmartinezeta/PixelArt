@@ -12,7 +12,7 @@ class PilaCapa {
     }
 
     newInstance() {
-        return new PilaCapa(this.array)
+        return new PilaCapa(this.array.slice())
     }
 
 }

@@ -9,6 +9,7 @@ import Columna from './components/Columna'
 import VistaPreviaCapas from './components/VistaPreviaCapas'
 import PixelArtProvider from './context/PixelArtStore'
 import Toolkit from './components/Toolkit'
+import HojaPixeleada from './components/HojaPixeleada'
 
 
 
@@ -26,7 +27,7 @@ function PixelArt() {
             </div>
             <div className="main">
                 <Columna className="main main__tablero">
-                    <Tablero />
+                    <HojaPixeleada />
                 </Columna>
                 <Columna className="main__vista-previa">
                     <VistaPrevia />

@@ -39,7 +39,7 @@ class FullLineaPixel {
     }
 
     newInstance() {
-        return new FullLineaPixel(this.pixelArray)
+        return new FullLineaPixel(this.pixelArray.slice())
     }
 
 }

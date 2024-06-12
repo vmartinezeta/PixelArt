@@ -88,3 +88,22 @@
     }
   }
 }
+
+
+
+
+.animacion {
+  display: flex;
+  justify-content: center;  
+  margin: 4px;
+  gap: 10px;
+  &__play,
+  &__stop {
+    width: 100px;
+    height: 40px;
+    border: none;
+    background: #eee;
+    font-size: 18px;
+    cursor: pointer;
+  }
+}

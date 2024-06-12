@@ -43,7 +43,7 @@ export default class CapturaCapa {
     isPuntoContiguo(pixeles, vector) {
         const [p1, p2] = pixeles
         const sistema = new SistemaReferencia(vector, p1.getUbicacion(), p2.getUbicacion())
-        if (sistema.estaMismaDireccion()) {
+        if (!sistema.estaMismaDireccion()) {
             pixeles.reverse()
         }
         let ok = false

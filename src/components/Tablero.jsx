@@ -1,33 +1,14 @@
-import { usePixelArt } from "../context/PixelArtStore"
 import Celda from "./Celda"
 import Fila from "./Fila"
 
 
-export default function Tablero({escala, disabled}) {
-    const { capa, arrastre, setArrastre } = usePixelArt()
+export default function Tablero({cuadriculaPixel}) {
 
-    const estado = ["tablero"]
-    if (escala) {
-        estado.push(escala)
-    }
-
-    return <div className={estado.join(" ")}
-        onPointerDown={() => {
-            arrastre.anterior = arrastre.actual
-            arrastre.actual = true
-            setArrastre(arrastre)
-        }}
-
-        onPointerUp={() => {
-            arrastre.anterior = false
-            arrastre.actual = false
-            setArrastre(arrastre)
-        }}
-    >
+    return <div className="tablero tablero__escala">
         {
-            capa.getCuadriculaPixel().toArray().map((filaPixel, fila) => {
+            cuadriculaPixel.toArray().map((filaPixel, fila) => {
                 return <Fila key={fila}>
-                    {filaPixel.map((pixel, i) => <Celda key={i} pixel={pixel} disabled={disabled} />)}
+                    {filaPixel.map((pixel, i) => <Celda key={i} pixel={pixel} disabled={true} />)}
                 </Fila>
             })
         }
